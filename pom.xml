@@ -5,7 +5,7 @@
 
 	<groupId>org.springframework</groupId>
 	<artifactId>review-service</artifactId>
-	<version>0.0.1</version>
+	<version>latest</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
