@@ -3,6 +3,7 @@ before_install:
 language: java 
 cache:
 - $HOME/.m2
+sudo: required
 jdk:
 - oraclejdk8
 services:
