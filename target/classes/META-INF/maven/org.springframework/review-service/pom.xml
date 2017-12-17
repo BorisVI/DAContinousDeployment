@@ -5,7 +5,7 @@
 
 	<groupId>org.springframework</groupId>
 	<artifactId>review-service</artifactId>
-	<version>0.1.0</version>
+	<version>latest</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -49,6 +49,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<docker.imagename>r0623646/dacontinuousdeployment</docker.imagename>
+        <docker.imagetag>latest</docker.imagetag>
 	</properties>
 
 
@@ -57,6 +59,46 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.10</version>
+				<configuration>
+					<imageName>${docker.imagename}:${docker.imagetag}</imageName>
+					<dockerDirectory>${project.basedir}/target/dockerfile</dockerDirectory>
+					<!-- copy the service's jar file from target into the root directory 
+						of the image -->
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/dockerfile</outputDirectory>
+							<resources>
+								<resource>
+									<directory>.</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
