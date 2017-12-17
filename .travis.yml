@@ -4,6 +4,8 @@ language: java
 cache:
 - $HOME/.m2
 sudo: required
+image_tag: 
+- latest
 jdk:
 - oraclejdk8
 services:
