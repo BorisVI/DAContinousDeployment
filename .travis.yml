@@ -4,8 +4,6 @@ language: java
 cache:
 - $HOME/.m2
 sudo: required
-image_tag: 
-- latest
 jdk:
 - oraclejdk8
 services:
@@ -13,5 +11,4 @@ services:
 script:
 - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 - mvn clean package
-- docker build -t r0623646/dacontinuousdeployment:latest
 - docker push r0623646/dacontinuousdeployment:latest
