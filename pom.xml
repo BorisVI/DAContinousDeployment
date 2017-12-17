@@ -49,6 +49,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<docker.imagename>r0623646/dacontinuousdeployment</docker.imagename>
+        <docker.imagetag>latest</docker.imagetag>
 	</properties>
 
 
